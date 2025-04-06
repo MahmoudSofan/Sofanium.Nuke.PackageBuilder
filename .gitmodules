@@ -1,0 +1,3 @@
+[submodule "Sofanium.Nuke"]
+	path = Sofanium.Nuke
+	url = https://github.com/MahmoudSofan/Sofanium.Nuke.git
