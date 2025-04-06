@@ -1,6 +1,6 @@
 using Nuke.Common;
-using ricaun.Nuke;
-using ricaun.Nuke.Components;
+using Sofanium.Nuke;
+using Sofanium.Nuke.Components;
 using Sofanium.Nuke.PackageBuilder.Components;
 using Sofanium.Nuke.PackageBuilder.Components.Revit;
 
