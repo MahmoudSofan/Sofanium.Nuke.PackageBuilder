@@ -1,6 +1,6 @@
 ﻿using InnoSetup.ScriptBuilder;
 using Nuke.Common.IO;
-using ricaun.Nuke.Extensions;
+using Sofanium.Nuke.Extensions;
 
 namespace Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit
 {
@@ -70,13 +70,13 @@ namespace Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit
 
             if (issConfiguration.IssLanguageLicences != null)
             {
-                foreach (var IssLanguageLicence in issConfiguration.IssLanguageLicences)
+                foreach (var issLanguageLicence in issConfiguration.IssLanguageLicences)
                 {
-                    var language = Languages.CreateEntry(name: IssLanguageLicence.Name,
-                        messagesFile: IssLanguageLicence.MessagesFile);
+                    var language = Languages.CreateEntry(name: issLanguageLicence.Name,
+                        messagesFile: issLanguageLicence.MessagesFile);
 
-                    if ((packageBuilderDirectory / IssLanguageLicence.Licence).FileExists())
-                        language.LicenseFile(IssLanguageLicence.Licence);
+                    if ((packageBuilderDirectory / issLanguageLicence.Licence).FileExists())
+                        language.LicenseFile(issLanguageLicence.Licence);
                 }
             }
             Sections.CreateParameterSection("UninstallDelete")

@@ -17,12 +17,12 @@ This package is to simplify the build automation system using to RevitAddin Appl
 ```C#
 using Nuke.Common;
 using Nuke.Common.Execution;
-using ricaun.Nuke;
-using ricaun.Nuke.Components;
+using Sofanium.Nuke;
+using Sofanium.Nuke.Components;
 
 class Build : NukeBuild, IPublishRevit
 {
-    // string IHazRevitPackageBuilder.Application => "Revit.App";
+    // string ISofRevitPackageBuilder.Application => "Revit.App";
     public static int Main() => Execute<Build>(x => x.From<IPublishRevit>().Build);
 }
 ```
@@ -39,32 +39,32 @@ env:
 
 ## IPublishRevit
 
-### IHazPackageBuilderProject
+### ISofPackageBuilderProject
 ```C#
-string IHazPackageBuilderProject.Name => "Example";
-bool IHazPackageBuilderProject.ReleasePackageBuilder => true;
-bool IHazPackageBuilderProject.ReleaseBundle => true;
-bool IHazPackageBuilderProject.ProjectNameFolder => true;
-bool IHazPackageBuilderProject.ProjectVersionFolder => true;
-bool IHazPackageBuilderProject.ProjectRemoveTargetFrameworkFolder => true;
+string ISofPackageBuilderProject.Name => "Example";
+bool ISofPackageBuilderProject.ReleasePackageBuilder => true;
+bool ISofPackageBuilderProject.ReleaseBundle => true;
+bool ISofPackageBuilderProject.ProjectNameFolder => true;
+bool ISofPackageBuilderProject.ProjectVersionFolder => true;
+bool ISofPackageBuilderProject.ProjectRemoveTargetFrameworkFolder => true;
 ```
 
-### IHazRevitPackageBuilder
+### ISofRevitPackageBuilder
 
 ```C#
-string IHazRevitPackageBuilder.Application => "Revit.App";
-string IHazRevitPackageBuilder.ApplicationType => "Application";
-bool IHazRevitPackageBuilder.MiddleVersions => true;
-bool IHazRevitPackageBuilder.NewVersions => true;
-string IHazRevitPackageBuilder.VendorId => "VendorId";
-string IHazRevitPackageBuilder.VendorDescription => "VendorDescription";
+string ISofRevitPackageBuilder.Application => "Revit.App";
+string ISofRevitPackageBuilder.ApplicationType => "Application";
+bool ISofRevitPackageBuilder.MiddleVersions => true;
+bool ISofRevitPackageBuilder.NewVersions => true;
+string ISofRevitPackageBuilder.VendorId => "VendorId";
+string ISofRevitPackageBuilder.VendorDescription => "VendorDescription";
 ```
 
-### IHazInstallationFiles
+### ISofInstallationFiles
 
 ```C#
-string IHazInstallationFiles.InstallationFiles => "InstallationFiles";
-IssConfiguration IHazInstallationFiles.IssConfiguration => new IssConfiguration()
+string ISofInstallationFiles.InstallationFiles => "InstallationFiles";
+IssConfiguration ISofInstallationFiles.IssConfiguration => new IssConfiguration()
 {
     Image = "image.bmp",
     ImageSmall = "imageSmall.bmp",

@@ -1,9 +1,8 @@
-using NUnit.Framework;
-using ricaun.Nuke.Extensions;
 using System.Reflection;
+using NUnit.Framework;
 using Sofanium.Nuke.PackageBuilder.Extensions;
 
-namespace ricaun.Nuke.PackageBuilder.Tests
+namespace Sofanium.Nuke.PackageBuilder.Tests
 {
     public class RevitExtension_Tests
     {

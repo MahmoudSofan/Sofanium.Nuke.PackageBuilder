@@ -1,12 +1,12 @@
 ﻿using Nuke.Common;
-using ricaun.Nuke.Extensions;
+using Sofanium.Nuke.Extensions;
 
 namespace Sofanium.Nuke.PackageBuilder.Components.Revit
 {
     /// <summary>
-    /// IHazRevitPackageBuilder
+    /// ISofRevitPackageBuilder
     /// </summary>
-    public interface ISofRevitPackageBuilder : ISofPackageBuilderProject, INukeBuild
+    public interface ISofRevitPackageBuilder : ISofPackageBuilderProject
     {
         /// <summary>
         /// IExternalApplication Class (default: "App")

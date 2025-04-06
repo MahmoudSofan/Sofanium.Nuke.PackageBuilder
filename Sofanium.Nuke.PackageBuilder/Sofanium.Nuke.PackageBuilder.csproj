@@ -71,12 +71,8 @@
     <PackageReference Include="Autodesk.PackageBuilder" Version="*" />
   </ItemGroup>
 
-  <!--
   <ItemGroup>
-    <Reference Include="ricaun.Nuke">
-      <HintPath>..\..\ricaun.Nuke\ricaun.Nuke\bin\Release\ricaun.Nuke.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Sofanium.Nuke\Sofanium.Nuke\Sofanium.Nuke.csproj" />
   </ItemGroup>
-    -->
 
 </Project>

@@ -5,7 +5,7 @@ using System.Linq;
 using Autodesk.PackageBuilder;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
-using ricaun.Nuke.Extensions;
+using Sofanium.Nuke.Extensions;
 using Sofanium.Nuke.PackageBuilder.Extensions;
 
 namespace Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit
@@ -18,7 +18,7 @@ namespace Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit
         /// <summary>
         /// Default plus year if lastVersionRevit is true
         /// </summary>
-        private const int LAST_VERSION_PLUS_YEAR = 1;
+        private const int LastVersionPlusYear = 1;
 
         /// <summary>
         /// RevitContentsBuilder
@@ -82,7 +82,7 @@ namespace Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit
             if (lastVersionRevit)
             {
                 Serilog.Log.Information($"Components Last Version");
-                while (lastVersion <= DateTime.Now.Year + LAST_VERSION_PLUS_YEAR)
+                while (lastVersion <= DateTime.Now.Year + LastVersionPlusYear)
                 {
                     lastVersion = AddRevitComponentsByFileVersion(project, addinFiles.Last(), bundleDirectory, lastVersion + 1);
                 }

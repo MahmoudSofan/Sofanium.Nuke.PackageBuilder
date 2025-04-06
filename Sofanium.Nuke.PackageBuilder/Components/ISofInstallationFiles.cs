@@ -6,14 +6,14 @@ using Sofanium.Nuke.PackageBuilder.PackageBuilder;
 using System;
 using System.IO;
 using System.IO.Compression;
-using ricaun.Nuke.Extensions;
+using Sofanium.Nuke.Extensions;
 
 namespace Sofanium.Nuke.PackageBuilder.Components;
 
 /// <summary>
-/// IHazInstallationFiles
+/// ISofInstallationFiles
 /// </summary>
-public interface ISofInstallationFiles : ISofPackageBuilderProject
+public interface ISofInstallationFiles : ISofPackageBuilderProject 
 {
     /// <summary>
     /// Folder/Url (default: InstallationFiles)

@@ -1,5 +1,5 @@
 ﻿using Nuke.Common;
-using ricaun.Nuke.Components;
+using Sofanium.Nuke.Components;
 using Sofanium.Nuke.PackageBuilder.Components.Revit;
 
 namespace Sofanium.Nuke.PackageBuilder
@@ -7,7 +7,7 @@ namespace Sofanium.Nuke.PackageBuilder
     /// <summary>
     /// IPublishRevit
     /// </summary>
-    public interface IPublishRevit : ICompile, IClean, ISign, IRelease, IRevitPackageBuilder, IGitRelease, IHazSolution, INukeBuild
+    public interface IPublishRevit : IRevitPackageBuilder, IGitRelease
     {
         /// <summary>
         /// Target Build

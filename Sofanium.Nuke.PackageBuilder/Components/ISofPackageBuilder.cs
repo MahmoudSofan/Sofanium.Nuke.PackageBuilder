@@ -5,7 +5,7 @@ using Nuke.Common.ProjectModel;
 namespace Sofanium.Nuke.PackageBuilder.Components
 {
     /// <summary>
-    /// IHazPackageBuilder
+    /// ISofPackageBuilder
     /// </summary>
     public interface ISofPackageBuilder : ISofPackageBuilderProject
     {

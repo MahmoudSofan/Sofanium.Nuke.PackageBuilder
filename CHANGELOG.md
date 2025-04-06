@@ -118,7 +118,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.4.0] / 2022-10-09
 ### Features
-- Feature `IHazRelease.ReleaseNameVersion` is disable
+- Feature `ISofRelease.ReleaseNameVersion` is disable
 ### Updated
 - Update `ricaun.Nuke` to `1.4.0`
 
@@ -196,7 +196,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.7] / 2022-03-23
 ### Changed
-- On IHazInstallationFiles change `Folder` to `InstallationFiles`
+- On ISofInstallationFiles change `Folder` to `InstallationFiles`
 - `InstallationFiles` download files if has a valid url
 
 ## [1.1.6] / 2022-03-18
@@ -210,7 +210,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.5] / 2022-03-10
 ### Changed
-- IHazPackageBuilderProject.Name works with EndWith
+- ISofPackageBuilderProject.Name works with EndWith
 ### Bug Fixes
 - Path Length 260 Limitation (Create a temp folder)
 
@@ -245,7 +245,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.0.13] / 2022-01-12
 - Add `NewVersions`
-- Add `IHazRevitPackageBuilder`
+- Add `ISofRevitPackageBuilder`
 
 ## [0.0.12] / 2022-01-04
 - Add Environment Variables
@@ -285,19 +285,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Exemple Update Version
 - Add icon.ico
 - Copy InstallationFiles
-- Add IHazInstallationFiles
+- Add ISofInstallationFiles
 - Add Icon/Image/License on IssRevitBuilder
 - Remove `.addin` Example
-- Set IHazMainProject on IHazPackageBuilderProject `Name`
+- Set ISofMainProject on ISofPackageBuilderProject `Name`
 
 ## [0.0.6] / 2021-12-17
 - Change name to `IRevitPackageBuilder`
 - Test Example Release
 - Add Configuration on Solution
-- Add IHazInput
+- Add ISofInput
 - Add Example
 - Change `IExternalApplication` base name to `App`
-- Add IHazPackageBuilderProject
+- Add ISofPackageBuilderProject
 
 ## [0.0.5] / 2021-12-09
 - Remove Parse Folder
