@@ -1,4 +1,4 @@
-﻿namespace ricaun.Nuke.Components
+﻿namespace Sofanium.Nuke.PackageBuilder.PackageBuilder
 {
     /// <summary>
     /// IssConfiguration

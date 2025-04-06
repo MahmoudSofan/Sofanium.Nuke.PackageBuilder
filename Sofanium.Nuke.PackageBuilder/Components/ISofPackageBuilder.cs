@@ -2,14 +2,12 @@
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 
-using ricaun.Nuke.Extensions;
-
-namespace ricaun.Nuke.Components
+namespace Sofanium.Nuke.PackageBuilder.Components
 {
     /// <summary>
     /// IHazPackageBuilder
     /// </summary>
-    public interface IHazPackageBuilder : IHazPackageBuilderProject, IHazSolution, INukeBuild
+    public interface ISofPackageBuilder : ISofPackageBuilderProject
     {
         /// <summary>
         /// Folder PackageBuilder 

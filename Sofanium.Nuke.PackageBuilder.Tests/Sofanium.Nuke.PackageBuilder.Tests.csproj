@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ricaun.Nuke.PackageBuilder\ricaun.Nuke.PackageBuilder.csproj" />
+    <ProjectReference Include="..\Sofanium.Nuke.PackageBuilder\Sofanium.Nuke.PackageBuilder.csproj" />
   </ItemGroup>
 
   <ItemGroup>

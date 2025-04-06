@@ -1,9 +1,9 @@
-﻿using Autodesk.PackageBuilder;
+﻿using System.IO;
+using Autodesk.PackageBuilder;
 using Nuke.Common.ProjectModel;
 using ricaun.Nuke.Extensions;
-using System.IO;
 
-namespace ricaun.Nuke.Components
+namespace Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit
 {
     /// <summary>
     /// RevitProjectAddInsBuilder

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using ricaun.Nuke.Extensions;
 using System.Reflection;
+using Sofanium.Nuke.PackageBuilder.Extensions;
 
 namespace ricaun.Nuke.PackageBuilder.Tests
 {

@@ -1,9 +1,8 @@
 ﻿using InnoSetup.ScriptBuilder;
 using Nuke.Common.IO;
-using Nuke.Common.ProjectModel;
 using ricaun.Nuke.Extensions;
 
-namespace ricaun.Nuke.Components
+namespace Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit
 {
     /// <summary>
     /// IssRevitBuilder

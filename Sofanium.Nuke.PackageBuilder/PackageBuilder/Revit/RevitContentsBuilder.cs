@@ -1,14 +1,14 @@
-﻿using Autodesk.PackageBuilder;
-using Nuke.Common;
-using Nuke.Common.IO;
-using Nuke.Common.ProjectModel;
-using ricaun.Nuke.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Autodesk.PackageBuilder;
+using Nuke.Common.IO;
+using Nuke.Common.ProjectModel;
+using ricaun.Nuke.Extensions;
+using Sofanium.Nuke.PackageBuilder.Extensions;
 
-namespace ricaun.Nuke.Components
+namespace Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit
 {
     /// <summary>
     /// RevitContentsBuilder

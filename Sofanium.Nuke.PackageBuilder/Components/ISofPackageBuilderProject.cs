@@ -1,16 +1,15 @@
-﻿using Nuke.Common;
-using Nuke.Common.IO;
+﻿using System.Linq;
+using Nuke.Common;
 using Nuke.Common.ProjectModel;
-
+using ricaun.Nuke.Components;
 using ricaun.Nuke.Extensions;
-using System.Linq;
 
-namespace ricaun.Nuke.Components
+namespace Sofanium.Nuke.PackageBuilder.Components
 {
     /// <summary>
     /// IHazPackageBuilderProject
     /// </summary>
-    public interface IHazPackageBuilderProject : IHazMainProject, IHazSolution, INukeBuild
+    public interface ISofPackageBuilderProject : IHazMainProject
     {
         /// <summary>
         /// PackageBuilder Project Name or EndWith Name
@@ -54,10 +53,10 @@ namespace ricaun.Nuke.Components
         /// <returns></returns>
         public Project GetPackageBuilderProject()
         {
-            if (Solution.GetOtherProject(Name) is Project project)
+            if (Solution.GetOtherProject(Name) is { } project)
                 return project;
             return Solution.GetOtherProjects(Name).FirstOrDefault() ?? 
-                throw new System.Exception($"{nameof(GetPackageBuilderProject)} is null using '{Name}', use 'string {nameof(IHazPackageBuilderProject)}.{nameof(Name)} => \"YourPackageBuilderProject\"'.");
+                throw new System.Exception($"{nameof(GetPackageBuilderProject)} is null using '{Name}', use 'string {nameof(ISofPackageBuilderProject)}.{nameof(Name)} => \"YourPackageBuilderProject\"'.");
         }
     }
 }

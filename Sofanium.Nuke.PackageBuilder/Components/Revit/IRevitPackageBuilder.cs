@@ -1,15 +1,19 @@
-﻿using Nuke.Common;
+﻿using System;
+using System.IO;
+using System.Linq;
+using Nuke.Common;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.InnoSetup;
 using Nuke.Common.Utilities.Collections;
+using ricaun.Nuke.Components;
 using ricaun.Nuke.Extensions;
-using System;
-using System.IO;
-using System.Linq;
+using Sofanium.Nuke.PackageBuilder.Extensions;
+using Sofanium.Nuke.PackageBuilder.PackageBuilder;
+using Sofanium.Nuke.PackageBuilder.PackageBuilder.Revit;
 
-namespace ricaun.Nuke.Components
+namespace Sofanium.Nuke.PackageBuilder.Components.Revit
 {
     /// <summary>
     /// IRevitPackageBuilder
@@ -23,14 +27,14 @@ namespace ricaun.Nuke.Components
     /// IRevitPackageBuilder
     /// </summary>
     public interface IRevitPackageBuilder<T> :
-        IHazRevitPackageBuilder, IHazPackageBuilderProject, IHazInstallationFiles,
-        IRelease, ISign, IHazPackageBuilder, IHazInput, IHazOutput, INukeBuild
+        ISofRevitPackageBuilder, ISofInstallationFiles,
+        IRelease, ISofPackageBuilder, ISofInput, ISofOutput
         where T : IssPackageBuilder, new()
     {
         /// <summary>
         /// Target PackageBuilder
         /// </summary>
-        Target PackageBuilder => _ => _
+        Target PackageBuilder => d => d
             .TriggeredBy(Sign)
             .Before(Release)
             .Executes(() =>
@@ -66,26 +70,26 @@ namespace ricaun.Nuke.Components
             var projectNameVersion = GetReleaseFileNameVersion(projectName, projectVersion);
 
             var bundleName = $"{projectName}.bundle";
-            var BundleDirectory = PackageBuilderDirectory / bundleName;
-            var ContentsDirectory = BundleDirectory / "Contents";
+            var bundleDirectory = PackageBuilderDirectory / bundleName;
+            var contentsDirectory = bundleDirectory / "Contents";
 
             if (ProjectNameFolder)
-                ContentsDirectory = ContentsDirectory / projectName;
+                contentsDirectory = contentsDirectory / projectName;
 
             if (ProjectVersionFolder)
-                ContentsDirectory = ContentsDirectory / projectVersion;
+                contentsDirectory = contentsDirectory / projectVersion;
 
-            AbsolutePathExtensions.Copy(InputDirectory, ContentsDirectory);
+            InputDirectory.Copy(contentsDirectory);
 
             if (ProjectRemoveTargetFrameworkFolder)
             {
-                AppendTargetFrameworkExtension.RemoveAppendTargetFrameworkDirectory(ContentsDirectory);
+                AppendTargetFrameworkExtension.RemoveAppendTargetFrameworkDirectory(contentsDirectory);
             }
 
-            CreateRevitAddinOnProjectFiles(project, ContentsDirectory);
+            CreateRevitAddinOnProjectFiles(project, contentsDirectory);
 
-            new RevitContentsBuilder(project, BundleDirectory, MiddleVersions, NewVersions)
-                .Build(BundleDirectory / "PackageContents.xml");
+            new RevitContentsBuilder(project, bundleDirectory, MiddleVersions, NewVersions)
+                .Build(bundleDirectory / "PackageContents.xml");
 
             if (releasePackageBuilder)
             {
@@ -111,7 +115,7 @@ namespace ricaun.Nuke.Components
                 // Deploy File
                 var outputInno = OutputDirectory;
                 var packageBuilderDirectory = GetMaxPathFolderOrTempFolder(PackageBuilderDirectory);
-                var issFiles = Globbing.GlobFiles(packageBuilderDirectory, $"*{projectName}.iss");
+                var issFiles = packageBuilderDirectory.GlobFiles($"*{projectName}.iss");
 
                 if (issFiles.IsEmpty())
                     Serilog.Log.Error($"Not found any .iss file in {packageBuilderDirectory}");
@@ -128,19 +132,19 @@ namespace ricaun.Nuke.Components
                 SignFolder(outputInno);
 
                 // Zip exe Files
-                var exeFiles = Globbing.GlobFiles(outputInno, "**/*.exe");
+                var exeFiles = outputInno.GlobFiles("**/*.exe");
                 exeFiles.ForEach(file => ZipExtension.ZipFileCompact(file, projectNameVersion));
 
                 if (exeFiles.IsEmpty())
                     Serilog.Log.Error($"Not found any .exe file in {outputInno}");
 
                 var message = string.Join(" | ", exeFiles.Select(e => e.Name));
-                ReportSummary(_ => _.AddPair("File", message));
+                ReportSummary(d => d.AddPair("File", message));
 
                 if (outputInno != ReleaseDirectory)
                 {
-                    Globbing.GlobFiles(outputInno, "**/*.zip")
-                        .ForEach(file => AbsolutePathExtensions.CopyToDirectory(file, ReleaseDirectory));
+                    outputInno.GlobFiles("**/*.zip")
+                        .ForEach(file => file.CopyToDirectory(ReleaseDirectory));
                 }
 
                 var folder = Path.GetFileName(PackageBuilderDirectory);
@@ -150,7 +154,7 @@ namespace ricaun.Nuke.Components
 
             if (releaseBundle)
             {
-                var releaseFileName = CreateReleaseFromDirectory(BundleDirectory, projectName, projectVersion, ".bundle.zip", true);
+                var releaseFileName = CreateReleaseFromDirectory(bundleDirectory, projectName, projectVersion, ".bundle.zip", true);
                 Serilog.Log.Information($"Release: {releaseFileName}");
             }
         }
@@ -162,7 +166,7 @@ namespace ricaun.Nuke.Components
         /// <param name="directory"></param>
         private void CreateRevitAddinOnProjectFiles(Project project, AbsolutePath directory)
         {
-            var addInFiles = Globbing.GlobFiles(directory, $"**/*{project.Name}*.dll")
+            var addInFiles = directory.GlobFiles($"**/*{project.Name}*.dll")
                             .Where(e => RevitExtension.HasRevitVersion(e));
 
             addInFiles.ForEach(file =>
@@ -175,37 +179,37 @@ namespace ricaun.Nuke.Components
         }
 
         /// <summary>
-        /// Check Folder if pass max path lenght return a copy with a temp folder
+        /// Check Folder if pass max path length return a copy with a temp folder
         /// </summary>
         /// <param name="packageBuilderDirectory"></param>
         /// <returns></returns>
         private AbsolutePath GetMaxPathFolderOrTempFolder(AbsolutePath packageBuilderDirectory)
         {
-            const string TEMP_FOLDER = "PackageBuilder";
-            const int MAX_PATH = 260;
+            const string tempFolder = "PackageBuilder";
+            const int maxPath = 260;
 
-            var temp = (AbsolutePath)Path.Combine(Path.GetTempPath(), TEMP_FOLDER);
+            var temp = (AbsolutePath)Path.Combine(Path.GetTempPath(), tempFolder);
             Serilog.Log.Information($"Path Max: {temp.ToString().Length} - {temp}");
 
             var file = packageBuilderDirectory;
             Serilog.Log.Information($"Path Max: {file.ToString().Length} - {Path.GetFileName(file)}");
 
-            Globbing.GlobFiles(packageBuilderDirectory, "**/*")
-                .ForEach(file =>
+            packageBuilderDirectory.GlobFiles("**/*")
+                .ForEach(path =>
                 {
-                    Serilog.Log.Information($"Path Max: {file.ToString().Length} - {Path.GetFileName(file)}");
+                    Serilog.Log.Information($"Path Max: {path.ToString().Length} - {Path.GetFileName(path)}");
                 });
 
-            var max = Globbing.GlobFiles(packageBuilderDirectory, "**/*").Max(file => file.ToString().Length);
+            var max = packageBuilderDirectory.GlobFiles("**/*").Max(path => path.ToString().Length);
 
             Serilog.Log.Information($"Path Max: {max}");
-            if (max >= MAX_PATH)
+            if (max >= maxPath)
             {
                 if (temp.DirectoryExists()) temp.DeleteDirectory();
-                AbsolutePathExtensions.Copy(packageBuilderDirectory, temp);
+                packageBuilderDirectory.Copy(temp);
                 var limit = max - file.ToString().Length + temp.ToString().Length;
                 Serilog.Log.Information($"Path Max: {limit} - {temp}");
-                return (AbsolutePath)temp;
+                return temp;
             }
 
             return packageBuilderDirectory;

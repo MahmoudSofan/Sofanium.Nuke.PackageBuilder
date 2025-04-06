@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>ricaun.Nuke.PackageBuilder</PackageId>
+    <PackageId>Sofanium.Nuke.PackageBuilder</PackageId>
     <Version Condition="'$(Version)' == ''">1.5.1</Version>
   </PropertyGroup>
 
@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Company>ricaun</Company>
-    <Authors>Luiz Henrique Cassettari</Authors>
+    <Company>danchou</Company>
+    <Authors>Mahmoud Sofan</Authors>
     <CopyrightYears>$([System.DateTime]::Now.ToString('yyyy'))</CopyrightYears>
   </PropertyGroup>
 
@@ -69,7 +69,6 @@
     <PackageReference Include="Tools.InnoSetup" Version="6.2.0" IncludeAssets="All" />
     <PackageReference Include="InnoSetup.ScriptBuilder" Version="*" />
     <PackageReference Include="Autodesk.PackageBuilder" Version="*" />
-    <PackageReference Include="ricaun.Nuke" Version="*" />
   </ItemGroup>
 
   <!--

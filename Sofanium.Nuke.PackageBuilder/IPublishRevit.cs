@@ -1,7 +1,8 @@
 ﻿using Nuke.Common;
 using ricaun.Nuke.Components;
+using Sofanium.Nuke.PackageBuilder.Components.Revit;
 
-namespace ricaun.Nuke
+namespace Sofanium.Nuke.PackageBuilder
 {
     /// <summary>
     /// IPublishRevit
@@ -11,7 +12,7 @@ namespace ricaun.Nuke
         /// <summary>
         /// Target Build
         /// </summary>
-        Target Build => _ => _
+        Target Build => d => d
             .DependsOn(Compile)
             .Executes(() =>
             {

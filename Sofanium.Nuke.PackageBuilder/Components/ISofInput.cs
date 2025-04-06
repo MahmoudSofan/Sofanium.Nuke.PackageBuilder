@@ -1,12 +1,13 @@
 ﻿using Nuke.Common;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
-namespace ricaun.Nuke.Components
+
+namespace Sofanium.Nuke.PackageBuilder.Components
 {
     /// <summary>
     /// IHazInput
     /// </summary>
-    public interface IHazInput : IHazPackageBuilderProject, IHazSolution, INukeBuild
+    public interface ISofInput : ISofPackageBuilderProject
     {
         /// <summary>
         /// Folder Input 
